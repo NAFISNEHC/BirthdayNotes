@@ -1,6 +1,6 @@
 class JudgeSex {
-  JudgeSex(this.sex) {}
-  String Judge() {
+  JudgeSex(this.sex);
+  String judge() {
     if (sex == '男')
       return 'images/boy.png';
     else

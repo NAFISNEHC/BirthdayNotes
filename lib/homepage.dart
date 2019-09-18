@@ -3,12 +3,12 @@ import 'listItemModel.dart';
 import 'JudgeSex.dart';
 import 'EngDate.dart';
 
-class homepage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => new _homepage();
+  State<StatefulWidget> createState() => new _HomePage();
 }
 
-class _homepage extends State {
+class _HomePage extends State {
   //homepage({Key key, this.title}) : super(key: key);
   final title = 'Longevity star';
   var today = DateTime.now();
@@ -51,7 +51,6 @@ class _homepage extends State {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return new Container(
       color: Colors.black87,
       child: new Scaffold(
@@ -89,7 +88,7 @@ class _homepage extends State {
                   child: Text.rich(new TextSpan(
                     children: <TextSpan>[
                       new TextSpan(
-                          text: '${EngDate(this.month, this.day).JudgeMonth()}',
+                          text: '${EngDate(this.month, this.day).judgeMonth()}',
                           style: new TextStyle(
                               color: Colors.white,
                               fontSize: 28.0,
@@ -107,7 +106,7 @@ class _homepage extends State {
                               fontSize: 20.0,
                               decoration: TextDecoration.none)),
                       new TextSpan(
-                          text: ' ${EngDate(this.month, this.day).JudgeDay()}',
+                          text: ' ${EngDate(this.month, this.day).judgeDay()}',
                           style: new TextStyle(
                               color: Colors.white,
                               fontSize: 20.0,
@@ -166,7 +165,7 @@ class _ListView extends StatelessWidget {
                       new ListTile(
                         leading: new CircleAvatar(
                           backgroundImage:
-                              AssetImage(new JudgeSex(item.sex).Judge()),
+                              AssetImage(new JudgeSex(item.sex).judge()),
                           backgroundColor: Colors.white,
                         ),
                         title: Text(

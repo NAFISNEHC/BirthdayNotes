@@ -1,6 +1,6 @@
 class EngDate {
-  EngDate(this.month, this.day) {}
-  String JudgeMonth() {
+  EngDate(this.month, this.day);
+  String judgeMonth() {
     if (this.month == 1)
       return 'January';
     else if (this.month == 2)
@@ -27,7 +27,7 @@ class EngDate {
       return 'December';
   }
 
-  String JudgeDay() {
+  String judgeDay() {
     if (this.day == 1 || this.day == 21 || this.day == 31)
       return 'st';
     else if (this.day == 2 || this.day == 22)

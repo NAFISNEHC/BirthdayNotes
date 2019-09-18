@@ -1,5 +1,5 @@
-class listItemModel {
-  listItemModel({
+class ListItemModel {
+  ListItemModel({
     this.name,
     this.sex,
     this.phone,
@@ -12,53 +12,53 @@ class listItemModel {
   final String img;
 }
 
-final List<listItemModel> items = [
-  listItemModel(
+final List<ListItemModel> items = [
+  ListItemModel(
     name: '陈运齐',
     sex: '男',
     phone: '17873443052',
   ),
-  listItemModel(
+  ListItemModel(
     name: '陈运齐',
     sex: '女',
     phone: '17873443052',
   ),
-  listItemModel(
+  ListItemModel(
     name: '陈运齐',
     sex: '男',
     phone: '17873443052',
   ),
-  listItemModel(
+  ListItemModel(
     name: '陈运齐',
     sex: '女',
     phone: '17873443052',
   ),
-  listItemModel(
+  ListItemModel(
     name: '陈运齐',
     sex: '男',
     phone: '17873443052',
   ),
-  listItemModel(
+  ListItemModel(
     name: '陈运齐',
     sex: '女',
     phone: '17873443052',
   ),
-  listItemModel(
+  ListItemModel(
     name: '陈运齐',
     sex: '男',
     phone: '17873443052',
   ),
-  listItemModel(
+  ListItemModel(
     name: '陈运齐',
     sex: '女',
     phone: '17873443052',
   ),
-  listItemModel(
+  ListItemModel(
     name: '陈运齐',
     sex: '男',
     phone: '17873443052',
   ),
-  listItemModel(
+  ListItemModel(
     name: '陈运齐',
     sex: '女',
     phone: '17873443052',

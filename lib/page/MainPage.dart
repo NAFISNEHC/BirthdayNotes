@@ -51,17 +51,45 @@ class _MainPageState extends State<MainPage> {
               width: 300.0,
             ),
             new Container(
-              margin: EdgeInsets.only(
-                top: 160.0,
-              ),
-              child: new Material(
-                color: Colors.black87,
-                child: RaisedButton(
-                  child: Text("Login"),
-                  onPressed: () => Navigator.pushNamed(context, 'login_page'),
+                margin: EdgeInsets.only(
+                  top: 160.0,
                 ),
-              ),
-            ),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        padding:
+                            EdgeInsets.only(top: 30.0, left: 16.0, right: 16.0),
+                        height: 80,
+                        child: RaisedButton(
+                          child: Text(
+                            "Login",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          color: Colors.red,
+                          onPressed: () =>
+                              Navigator.pushNamed(context, 'login_page'),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        height: 80,
+                        child: RaisedButton(
+                          child: Text(
+                            "Login",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          color: Colors.red,
+                          onPressed: () =>
+                              Navigator.pushNamed(context, 'login_page'),
+                        ),
+                      ),
+                    )
+                  ],
+                )),
           ],
         ),
       ),

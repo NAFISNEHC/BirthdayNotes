@@ -1,15 +1,17 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/page/HomePage.dart';
+import 'package:flutter_app/page/LoginPage.dart';
 import 'package:flutter_app/page/MainPage.dart';
 
 class MainRouters {
   static Map<String, WidgetBuilder> routes() {
     return <String, WidgetBuilder>{
-      '/': (BuildContext context) => new MainPage(),
-      '/home': (BuildContext context) => BotToastInit(
+      'main': (context) => MainPage(),
+      'home': (context) => BotToastInit(
             child: HomePage(),
           ),
+      'login_page': (context) => LoginPage(),
     };
   }
 }

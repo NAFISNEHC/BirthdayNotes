@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       navigatorObservers: [BotToastNavigatorObserver()], //1.注册路由观察者
-      initialRoute: '/',
+      initialRoute: 'main',
       routes: MainRouters.routes(),
     );
   }

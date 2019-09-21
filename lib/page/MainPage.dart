@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import './HomePage.dart';
 
 class MainPage extends StatefulWidget {
   MainPage({Key key, this.title}) : super(key: key);
@@ -57,19 +56,9 @@ class _MainPageState extends State<MainPage> {
               ),
               child: new Material(
                 color: Colors.black87,
-                child: new MaterialButton(
-                  child: new Text(
-                    'Take Notes',
-                    style: TextStyle(color: Colors.white, fontSize: 18.0),
-                  ),
-                  minWidth: 200.0,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      new MaterialPageRoute(
-                          builder: (context) => new HomePage()),
-                    );
-                  },
+                child: RaisedButton(
+                  child: Text("Login"),
+                  onPressed: () => Navigator.pushNamed(context, 'login_page'),
                 ),
               ),
             ),

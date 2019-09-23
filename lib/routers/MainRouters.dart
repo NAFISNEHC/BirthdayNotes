@@ -8,7 +8,7 @@ class MainRouters {
   static Map<String, WidgetBuilder> routes() {
     return <String, WidgetBuilder>{
       'main': (context) => MainPage(),
-      'home': (context) => BotToastInit(
+      'home_page': (context) => BotToastInit(
             child: HomePage(),
           ),
       'login_page': (context) => LoginPage(),

@@ -30,7 +30,7 @@ class _MainPageState extends State<MainPage> {
             ),
             new Container(
               margin: EdgeInsets.only(
-                top: 10.0,
+                top: 20.0,
               ),
               child: new Text(
                 'Birthday Notes',
@@ -41,7 +41,7 @@ class _MainPageState extends State<MainPage> {
             ),
             new Container(
               margin: EdgeInsets.only(
-                top: 50.0,
+                top: 70.0,
               ),
               child: new Text(
                 'Each birthday is a milestone we touch along life\'s way.\nAffectionate birthday greetings!',
@@ -60,14 +60,14 @@ class _MainPageState extends State<MainPage> {
                       flex: 1,
                       child: Container(
                         padding:
-                            EdgeInsets.only(top: 30.0, left: 16.0, right: 16.0),
+                            EdgeInsets.only(top: 10.0, left: 17.0, right: 0.0),
                         height: 80,
                         child: RaisedButton(
                           child: Text(
                             "Login",
                             style: TextStyle(color: Colors.white),
                           ),
-                          color: Colors.red,
+                          color: Colors.red[300],
                           onPressed: () =>
                               Navigator.pushNamed(context, 'login_page'),
                         ),
@@ -76,13 +76,15 @@ class _MainPageState extends State<MainPage> {
                     Expanded(
                       flex: 1,
                       child: Container(
+                        padding:
+                            EdgeInsets.only(top: 50.0, left: 27.0, right: 20.0),
                         height: 80,
                         child: RaisedButton(
                           child: Text(
                             "Login",
                             style: TextStyle(color: Colors.white),
                           ),
-                          color: Colors.red,
+                          color: Colors.red[200],
                           onPressed: () =>
                               Navigator.pushNamed(context, 'login_page'),
                         ),

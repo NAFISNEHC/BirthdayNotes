@@ -1,15 +1,16 @@
 class ListItemModel {
+  final String name;
+  final String sex;
+  final String phone;
+  final String img;
+  final bool sendSMS;
+
   ListItemModel({
     this.name,
     this.sex,
     this.phone,
     this.img,
-  });
-
-  final String name;
-  final String sex;
-  final String phone;
-  final String img;
+  }) : sendSMS = false;
 }
 
 final List<ListItemModel> items = [

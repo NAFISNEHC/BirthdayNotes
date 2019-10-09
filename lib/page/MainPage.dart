@@ -1,3 +1,4 @@
+import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
@@ -9,6 +10,24 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  String devId;
+
+  @override
+  void initState() {
+    super.initState();
+    getDevId();
+  }
+
+  // 获取设备信息
+  getDevId() async {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+    print('Running on ${androidInfo.androidId}');
+    setState(() {
+      devId = androidInfo.androidId;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,18 +60,20 @@ class _MainPageState extends State<MainPage> {
             ),
             new Container(
               margin: EdgeInsets.only(
-                top: 70.0,
+                top: 60.0,
               ),
               child: new Text(
-                'Each birthday is a milestone we touch along life\'s way.\nAffectionate birthday greetings!',
-                style: TextStyle(color: Colors.black87, fontSize: 18.0),
+                'Each birthday is a milestone we touch along life' +
+                    '\'s way.\nAffectionate birthday greetings!' +
+                    '\n设备唯一码为\n$devId\n(提交此设备码给管理进行授权访问)',
+                style: TextStyle(color: Colors.black87, fontSize: 16.0),
                 textAlign: TextAlign.center,
               ),
               width: 300.0,
             ),
             new Container(
                 margin: EdgeInsets.only(
-                  top: 160.0,
+                  top: 10.0,
                 ),
                 child: Row(
                   children: <Widget>[
@@ -60,33 +81,16 @@ class _MainPageState extends State<MainPage> {
                       flex: 1,
                       child: Container(
                         padding:
-                            EdgeInsets.only(top: 10.0, left: 17.0, right: 0.0),
-                        height: 80,
-                        child: RaisedButton(
-                          child: Text(
-                            "Login",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          color: Colors.red[300],
-                          onPressed: () =>
-                              Navigator.pushNamed(context, 'login_page'),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        padding:
                             EdgeInsets.only(top: 50.0, left: 27.0, right: 20.0),
-                        height: 80,
+                        height: 120,
                         child: RaisedButton(
                           child: Text(
-                            "Login",
+                            "开始使用",
                             style: TextStyle(color: Colors.white),
                           ),
                           color: Colors.red[200],
                           onPressed: () =>
-                              Navigator.pushNamed(context, 'login_page'),
+                              Navigator.pushNamed(context, 'user_list'),
                         ),
                       ),
                     )

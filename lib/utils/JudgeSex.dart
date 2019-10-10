@@ -6,6 +6,5 @@ class JudgeSex {
     else
       return 'images/girl.png';
   }
-
   String sex;
 }

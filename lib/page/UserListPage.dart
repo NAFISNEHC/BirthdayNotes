@@ -25,6 +25,7 @@ class _UserListPageState extends State<UserListPage> {
   var today = DateTime.now();
   var month = DateTime.now().month;
   var day = DateTime.now().day;
+  String str = "";
 
   RefreshController _refreshController = RefreshController(initialRefresh: false);
   List<UserInfo> userList = [];
@@ -95,6 +96,9 @@ class _UserListPageState extends State<UserListPage> {
                         contentPadding: EdgeInsets.only(bottom: 2.0),
                         border: InputBorder.none,
                       ),
+
+                      // 获取查找框输入的文本
+                      onSubmitted: (s) {str = s;},
                     ),
                   ),
                   Row(

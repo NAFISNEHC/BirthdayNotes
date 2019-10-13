@@ -34,7 +34,6 @@ class HttpUtils {
         url = url.replaceAll(':$key', value.toString());
       }
     });
-    print("$data");
     url = API_PREFIX + url;
     /// 打印请求相关信息：请求地址、请求方式、请求参数
     print('请求地址：【' + method + '  ' + url + '】');

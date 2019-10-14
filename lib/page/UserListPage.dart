@@ -25,6 +25,7 @@ class _UserListPageState extends State<UserListPage> {
   var today = DateTime.now();
   var month = DateTime.now().month;
   var day = DateTime.now().day;
+  bool flag = false;
   String str = "";
 
   RefreshController _refreshController = RefreshController(initialRefresh: false);
@@ -98,7 +99,31 @@ class _UserListPageState extends State<UserListPage> {
                       ),
 
                       // 获取查找框输入的文本
-                      onSubmitted: (s) {str = s;},
+                      onSubmitted: (s) async{
+                        try{
+                          if(s == "") {
+                            List<UserInfo> userData = await UserApi.getUserList(null);
+                            userList = userData;
+                          }
+                          for(var i = 0; i < userList.length; ++i) {
+                            if(s != "" && userList[i].name != s && userList[i].phone != s) {
+                              userList.elementAt(i--);
+                              userList.length--;
+                            }
+                          }
+                          if(s != ""){
+                            flag = true;
+                          }
+                          else{
+                            flag = false;
+                          }
+                          str = s;
+                          if (mounted) setState(() {});
+                          _refreshController.refreshCompleted();
+                        }catch(e){
+                          _refreshController.refreshFailed();
+                        }
+                      },
                     ),
                   ),
                   Row(
@@ -172,10 +197,13 @@ class _UserListPageState extends State<UserListPage> {
                       onRefresh: () async {
                         //从网络获取数据
                         try{
-                          List<UserInfo> userData = await UserApi.getUserList(null);
-                          userList = userData;
+                          if(!flag) {
+                            List<UserInfo> userData = await UserApi.getUserList(
+                                null);
+                            userList = userData;
+                          }
                           if (mounted) setState(() {});
-                          _refreshController.refreshCompleted();
+                            _refreshController.refreshCompleted();
                         }catch(e){
                           _refreshController.refreshFailed();
                         }
@@ -185,6 +213,15 @@ class _UserListPageState extends State<UserListPage> {
                         //从网络获取数据
                         try{
                           List<UserInfo> date = await UserApi.getUserList(null);
+                          if(flag) {
+                            for(var i = 0; i < date.length; ++i) {
+                              print(date[i].name);
+                              if(date[i].name != str && date[i].phone != str) {
+                                date.elementAt(i--);
+                                date.length--;
+                              }
+                            }
+                          }
                           if(date.length == 0) {
                             _refreshController.loadNoData();
                           }

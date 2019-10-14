@@ -187,7 +187,7 @@ class _ListView extends StatelessWidget {
                       new ListTile(
                         leading: new CircleAvatar(
                           backgroundImage:
-                              AssetImage(new JudgeSex(item.sex).judge()),
+                              AssetImage(new JudgeSex(1).judge()),
                           backgroundColor: Colors.white,
                         ),
                         title: Text(

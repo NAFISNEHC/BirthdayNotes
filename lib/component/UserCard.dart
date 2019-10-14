@@ -28,7 +28,7 @@ class UserCard extends StatelessWidget {
                     backgroundColor: Colors.white,
                   ),
                   title: Text(
-                    userInfo.name,
+                    userInfo.userName,
                     style: TextStyle(
                       color: Colors.black87,
                       fontWeight: FontWeight.w500,

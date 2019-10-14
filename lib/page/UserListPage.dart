@@ -27,6 +27,7 @@ class _UserListPageState extends State<UserListPage> {
   var day = DateTime.now().day;
   bool flag = false;
   String str = "";
+  Map params = Map();
 
   RefreshController _refreshController = RefreshController(initialRefresh: false);
   List<UserInfo> userList = [];
@@ -34,9 +35,12 @@ class _UserListPageState extends State<UserListPage> {
   @override
   void initState() {
     super.initState();
-    getUserList(null).then((data){
+    params['pageNum'] = 1;
+    getUserList(params).then((data){
       userList = data;
-      setState(() { });
+      setState(() {
+        params: params;
+      });
     });
   }
 
@@ -101,24 +105,13 @@ class _UserListPageState extends State<UserListPage> {
                       // 获取查找框输入的文本
                       onSubmitted: (s) async{
                         try{
-                          if(s == "") {
-                            List<UserInfo> userData = await UserApi.getUserList(null);
-                            userList = userData;
-                          }
-                          for(var i = 0; i < userList.length; ++i) {
-                            if(s != "" && userList[i].name != s && userList[i].phone != s) {
-                              userList.elementAt(i--);
-                              userList.length--;
-                            }
-                          }
-                          if(s != ""){
-                            flag = true;
-                          }
-                          else{
-                            flag = false;
-                          }
-                          str = s;
-                          if (mounted) setState(() {});
+                          params['pageNum'] = 1;
+                          params['keyword'] = s;
+                          List<UserInfo> userData = await UserApi.getUserList(params);
+                          userList = userData;
+                          if (mounted) setState(() {
+                            params: params;
+                          });
                           _refreshController.refreshCompleted();
                         }catch(e){
                           _refreshController.refreshFailed();
@@ -198,13 +191,16 @@ class _UserListPageState extends State<UserListPage> {
                         //从网络获取数据
                         try{
                           if(!flag) {
-                            List<UserInfo> userData = await UserApi.getUserList(
-                                null);
+                            params['pageNum'] = 1;
+                            List<UserInfo> userData = await UserApi.getUserList(params);
                             userList = userData;
                           }
-                          if (mounted) setState(() {});
+                          if (mounted) setState(() {
+                            params: params;
+                          });
                             _refreshController.refreshCompleted();
                         }catch(e){
+                          print(e);
                           _refreshController.refreshFailed();
                         }
                       },
@@ -212,17 +208,10 @@ class _UserListPageState extends State<UserListPage> {
                       onLoading: () async {
                         //从网络获取数据
                         try{
-                          List<UserInfo> date = await UserApi.getUserList(null);
-                          if(flag) {
-                            for(var i = 0; i < date.length; ++i) {
-                              print(date[i].name);
-                              if(date[i].name != str && date[i].phone != str) {
-                                date.elementAt(i--);
-                                date.length--;
-                              }
-                            }
-                          }
+                          params['pageNum']++;
+                          List<UserInfo> date = await UserApi.getUserList(params);
                           if(date.length == 0) {
+                            BotToast.showSimpleNotification(title: "没有数据了");
                             _refreshController.loadNoData();
                           }
                           userList.addAll(date);

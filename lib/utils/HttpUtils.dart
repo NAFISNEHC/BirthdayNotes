@@ -11,7 +11,7 @@ class HttpUtils {
   static Dio dio;
 
   /// 默认配置
-  static const String API_PREFIX = 'http://47.110.46.62:3000/mock/40/regSys';
+  static const String API_PREFIX = 'http://192.168.0.100:8080/bn';
   static const int CONNECT_TIMEOUT = 10000;
   static const int RECEIVE_TIMEOUT = 3000;
 
@@ -23,9 +23,10 @@ class HttpUtils {
   static const String DELETE = 'delete';
 
   /// 请求方法
-  static Future<dynamic> request(String url, {data, method}) async {
+  static Future<dynamic> request(String url, {data, method, headers}) async {
     data = data ?? {};
     method = method ?? 'GET';
+    headers = headers ?? {};
     /// restful 请求处理
     /// /gysw/search/hist/:user_id user_id=27
     /// 最终生成 url 为 /gysw/search/hist/27
@@ -41,7 +42,7 @@ class HttpUtils {
     Dio dio = createInstance();
     var result;
     try {
-      Response<Map<String, dynamic>> response = await dio.request(url, data: data, options: new Options(method: method));
+      Response<Map<String, dynamic>> response = await dio.request(url, data: data, options: new Options(method: method, headers: headers, contentType: Headers.jsonContentType,));
       var resData = Result.fromJson(response.data);
       // 判断是否成功
       if(resData.code == 0){

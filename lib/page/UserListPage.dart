@@ -52,18 +52,12 @@ class _UserListPageState extends State<UserListPage> {
   // 生成一个一个的
   Widget buildUserCard() {
     if (userList.length == 0) return null;
-    return ListView.separated(
+    return ListView.builder(
       physics: ClampingScrollPhysics(),
       padding: EdgeInsets.only(left: 10, right: 10),
       itemBuilder: (c, i) => UserCard(
         userInfo: userList[i],
       ),
-      separatorBuilder: (context, index) {
-        return Container(
-          height: 0.5,
-          color: Colors.greenAccent,
-        );
-      },
       itemCount: userList.length,
     );
   }

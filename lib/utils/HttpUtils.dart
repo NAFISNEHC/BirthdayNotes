@@ -11,7 +11,7 @@ class HttpUtils {
   static Dio dio;
 
   /// 默认配置
-  static const String API_PREFIX = 'http://192.168.0.100:8080/bn';
+  static const String API_PREFIX = 'http://192.168.0.107:8080/bn';
   static const int CONNECT_TIMEOUT = 10000;
   static const int RECEIVE_TIMEOUT = 3000;
 

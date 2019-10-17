@@ -36,30 +36,29 @@ class MyApp extends StatelessWidget {
       // Viewport不满一屏时,禁用上拉加载更多功能
       enableBallisticLoad: true,
       // 可以通过惯性滑动触发加载更多
-      child: MaterialApp(
-        localizationsDelegates: [
-          // 这行是关键
-          RefreshLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: [
-          const Locale('en'),
-          const Locale.fromSubtags(languageCode: 'zh'),
-          // generic Chinese 'zh'
-          const Locale.fromSubtags(
-              languageCode: 'zh', scriptCode: 'Hans', countryCode: 'CN'),
-          // 'zh_Hans_CN'
-        ],
-        localeResolutionCallback:
-            (Locale locale, Iterable<Locale> supportedLocales) {
-          //print("change language");
-          return locale;
-        },
-        navigatorObservers: [BotToastNavigatorObserver()],
-        //1.注册路由观察者
-        home: MainPage(),
-        routes: MainRouters.routes(),
+      child: //1.使用BotToastInit直接包裹MaterialApp
+      BotToastInit(
+        child: MaterialApp(
+          localizationsDelegates: [
+            // 这行是关键
+            RefreshLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: [
+            const Locale('en'),
+            const Locale.fromSubtags(languageCode: 'zh'),
+          ],
+          localeResolutionCallback:
+              (Locale locale, Iterable<Locale> supportedLocales) {
+            //print("change language");
+            return locale;
+          },
+          navigatorObservers: [BotToastNavigatorObserver()],
+          //1.注册路由观察者
+          home: MainPage(),
+          routes: MainRouters.routes(),
+        ),
       ),
     );
   }

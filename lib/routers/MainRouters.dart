@@ -1,4 +1,3 @@
-import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/page/HomePage.dart';
 import 'package:flutter_app/page/LoginPage.dart';
@@ -9,13 +8,9 @@ class MainRouters {
   static Map<String, WidgetBuilder> routes() {
     return <String, WidgetBuilder>{
       'main': (context) => MainPage(),
-      'home_page': (context) => BotToastInit(
-            child: HomePage(),
-          ),
+      'home_page': (context) => HomePage(),
       'login_page': (context) => LoginPage(),
-      'user_list': (context) => BotToastInit(
-            child: UserListPage(),
-          ),
+      'user_list': (context) => UserListPage(),
     };
   }
 }

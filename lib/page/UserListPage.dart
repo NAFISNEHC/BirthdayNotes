@@ -39,7 +39,6 @@ class _UserListPageState extends State<UserListPage> {
     getUserList(params).then((data) {
       userList = data;
       setState(() {
-        params:
         params;
       });
     });
@@ -233,7 +232,7 @@ class _UserListPageState extends State<UserListPage> {
             DateTime.now().difference(_lastPressedAt) > Duration(seconds: 1)) {
           //两次点击间隔超过1秒则重新计时
           _lastPressedAt = DateTime.now();
-          BotToast.showText(text: "在按一下退出APP"); //弹出简单通知Toast
+          BotToast.showText(text: "再按一下退出APP！"); //弹出简单通知Toast
           return false;
         }
         // 提示退出？

@@ -1,5 +1,10 @@
 class EngDate {
+
+  var month;
+  var day;
+
   EngDate(this.month, this.day);
+
   String judgeMonth() {
     if (this.month == 1)
       return 'January';
@@ -37,7 +42,4 @@ class EngDate {
     else
       return 'th';
   }
-
-  var month;
-  var day;
 }

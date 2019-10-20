@@ -1,15 +1,14 @@
-import 'dart:convert';
-
 import 'package:flutter_app/model/PageData.dart';
+import 'package:flutter_app/model/SearchFilter.dart';
 import 'package:flutter_app/model/UserInfo.dart';
 import 'package:flutter_app/utils/HttpUtils.dart';
 
 class UserApi {
-  static getUserList(params) async {
+  static getUserList(SearchFilter params) async {
     var pageData = await HttpUtils.request(
         "/api/user/list",
         method: HttpUtils.POST,
-        data: params,
+        data: params.toMap(),
         headers: {"content-type" : "application/json"}
     );
     PageData pageData2 = PageData.fromJson(pageData);

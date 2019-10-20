@@ -1,6 +1,7 @@
-import 'package:dio/dio.dart';
 import 'dart:async';
 
+import 'package:bot_toast/bot_toast.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_app/model/Result.dart';
 
 /// 封装 restful 请求
@@ -54,6 +55,7 @@ class HttpUtils {
     } on DioError catch (e) {
       /// 打印请求失败相关信息
       print('请求出错：' + e.toString());
+      BotToast.showText(text: "服务器错误：" + e.toString());
     }
     return result;
   }

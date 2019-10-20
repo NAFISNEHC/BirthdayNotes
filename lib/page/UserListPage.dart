@@ -13,13 +13,11 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 //only ListView
 class UserListPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return _UserListPageState();
-  }
+  State<StatefulWidget> createState() => _UserListPageState();
 }
 
 class _UserListPageState extends State<UserListPage> {
+
   DateTime _lastPressedAt; //上次点击时间
   DateTime _date = DateTime.now();
   final title = 'Longevity star';
@@ -52,11 +50,13 @@ class _UserListPageState extends State<UserListPage> {
   }
 
   // 日期选择
-  Future<void> _selectDay() async {
+  Future<void> _selectDay(BuildContext context) async {
     final DateTime picked = await showDatePicker(context: context,
-        initialDate: _date,
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101));
+      initialDate: _date,
+      firstDate: DateTime(2015, 8),
+      lastDate: DateTime(2101),
+      locale: Locale.fromSubtags(languageCode: 'zh'),
+    );
     if (picked != null && picked != _date)
       setState(() {
         _date = picked;
@@ -140,7 +140,9 @@ class _UserListPageState extends State<UserListPage> {
                     margin:
                     EdgeInsets.only(left: 10.0, top: 10.0, bottom: 20),
                     child: InkWell(
-                      onTap: _selectDay,
+                      onTap: () {
+                        _selectDay(context);
+                      },
                       child: RichText(
                           textDirection: TextDirection.ltr,
                           text: TextSpan(

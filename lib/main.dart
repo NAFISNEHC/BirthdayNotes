@@ -40,24 +40,17 @@ class MyApp extends StatelessWidget {
       BotToastInit(
         child: MaterialApp(
           localizationsDelegates: [
-            // 这行是关键
-            RefreshLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: [
-            const Locale('en'),
             const Locale.fromSubtags(languageCode: 'zh'),
+            const Locale.fromSubtags(languageCode: 'en'),
           ],
-          localeResolutionCallback:
-              (Locale locale, Iterable<Locale> supportedLocales) {
-            //print("change language");
-            return locale;
-          },
           navigatorObservers: [BotToastNavigatorObserver()],
           //1.注册路由观察者
           home: MainPage(),
-          routes: MainRouters.routes(),
+          routes: MainRouters.routes(context),
         ),
       ),
     );

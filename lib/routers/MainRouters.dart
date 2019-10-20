@@ -5,12 +5,12 @@ import 'package:flutter_app/page/MainPage.dart';
 import 'package:flutter_app/page/UserListPage.dart';
 
 class MainRouters {
-  static Map<String, WidgetBuilder> routes() {
+  static Map<String, WidgetBuilder> routes(BuildContext context) {
     return <String, WidgetBuilder>{
-      'main': (context) => MainPage(),
-      'home_page': (context) => HomePage(),
-      'login_page': (context) => LoginPage(),
-      'user_list': (context) => UserListPage(),
+      'main': (BuildContext context) => MainPage(),
+      'home_page': (BuildContext context) => HomePage(),
+      'login_page': (BuildContext context) => LoginPage(),
+      'user_list': (BuildContext context) => UserListPage(),
     };
   }
 }

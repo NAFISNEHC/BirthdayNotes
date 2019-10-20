@@ -49,14 +49,14 @@ packages:
       name: device_info
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.4.0+3"
+    version: "0.4.0+4"
   dio:
     dependency: "direct main"
     description:
       name: dio
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "3.0.1"
+    version: "3.0.3"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -127,7 +127,7 @@ packages:
       name: pull_to_refresh
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.5.6"
+    version: "1.5.7"
   quiver:
     dependency: transitive
     description:

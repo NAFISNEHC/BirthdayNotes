@@ -62,6 +62,8 @@ class _UserListPageState extends State<UserListPage> {
           .getStartAnEndDay(date: picked, type: 's');
       _params.endDay = DataUtils.instance
           .getStartAnEndDay(date: picked);
+      // 选择日期后页面要修改为1
+      _params.pageNum = 1;
       // 获取数据
       getUserList(_params);
       setState(() {

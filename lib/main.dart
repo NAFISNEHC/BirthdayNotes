@@ -39,6 +39,8 @@ class MyApp extends StatelessWidget {
       BotToastInit(
         child: MaterialApp(
           localizationsDelegates: [
+            // 这行是pull_to_refresh的国际化
+            RefreshLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
           ],

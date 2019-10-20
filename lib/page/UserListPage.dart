@@ -18,38 +18,37 @@ class UserListPage extends StatefulWidget {
 
 class _UserListPageState extends State<UserListPage> {
 
-  DateTime _lastPressedAt; //上次点击时间
+  //上次点击时间
+  DateTime _lastPressedAt;
+
+  // 上面显示的那个日期
   DateTime _date = DateTime.now();
-  final title = 'Longevity star';
 
-  bool flag = false;
-  String str = "";
-  SearchFilter params = SearchFilter(
-      1, null, DataUtils.instance.getFormartData(timeSamp: DateTime
-      .now()
-      .subtract(new Duration(days: 1))
-      .millisecondsSinceEpoch, format: "yyyy-MM-ddT23:59:59"),
-      DataUtils.instance.getFormartData(timeSamp: DateTime
-          .now()
-          .millisecondsSinceEpoch, format: "yyyy-MM-ddT23:59:59"));
+  // 查询的参数
+  SearchFilter _params = SearchFilter(
+      1, null,
+      DataUtils.instance
+          .getStartAnEndDay(date: DateTime.now(), type: 's'),
+      DataUtils.instance
+          .getStartAnEndDay(date: DateTime.now()));
 
+  // 刷新控制器
   RefreshController _refreshController =
   RefreshController(initialRefresh: false);
+
+  // 展示的用户数据
   List<UserInfo> userList = [];
 
   @override
   void initState() {
     super.initState();
-    params.pageNum = 1;
-    getUserList(params).then((data) {
-      userList = data;
-      setState(() {
-        params;
-      });
-    });
+    _params.pageNum = 1;
+    getUserList(_params);
   }
 
-  // 日期选择
+  /// 日期选择
+  ///
+  /// [context] 上下文
   Future<void> _selectDay(BuildContext context) async {
     final DateTime picked = await showDatePicker(context: context,
       initialDate: _date,
@@ -57,16 +56,28 @@ class _UserListPageState extends State<UserListPage> {
       lastDate: DateTime(2101),
       locale: Locale.fromSubtags(languageCode: 'zh'),
     );
-    if (picked != null && picked != _date)
+    if (picked != null && picked != _date) {
+      // 修改参数
+      _params.startDay = DataUtils.instance
+          .getStartAnEndDay(date: picked, type: 's');
+      _params.endDay = DataUtils.instance
+          .getStartAnEndDay(date: picked);
+      // 获取数据
+      getUserList(_params);
       setState(() {
         _date = picked;
       });
+    }
     if (picked == null) _date = DateTime.now();
   }
 
-  Future<List<UserInfo>> getUserList(SearchFilter params) async {
-    List<UserInfo> userList = await UserApi.getUserList(params);
-    return userList;
+  // 获取用户数据并且刷新列表
+  Future<void> getUserList(SearchFilter params) async {
+    List<UserInfo> data = await UserApi.getUserList(params);
+    setState(() {
+      userList = data;
+      _params = _params;
+    });
   }
 
   // 生成一个一个的
@@ -119,15 +130,9 @@ class _UserListPageState extends State<UserListPage> {
                     // 获取查找框输入的文本
                     onSubmitted: (s) async {
                       try {
-                        params.pageNum = 1;
-                        params.keyword = s;
-                        List<UserInfo> userData =
-                        await UserApi.getUserList(params);
-                        userList = userData;
-                        if (mounted)
-                          setState(() {
-                            params = params;
-                          });
+                        _params.pageNum = 1;
+                        _params.keyword = s;
+                        getUserList(_params);
                         _refreshController.refreshCompleted();
                       } catch (e) {
                         _refreshController.refreshFailed();
@@ -205,16 +210,8 @@ class _UserListPageState extends State<UserListPage> {
                     onRefresh: () async {
                       //从网络获取数据
                       try {
-                        if (!flag) {
-                          params.pageNum = 1;
-                          List<UserInfo> userData =
-                          await UserApi.getUserList(params);
-                          userList = userData;
-                        }
-                        if (mounted)
-                          setState(() {
-                            params = params;
-                          });
+                        _params.pageNum = 1;
+                        getUserList(_params);
                         _refreshController.refreshCompleted();
                       } catch (e) {
                         print(e);
@@ -225,9 +222,9 @@ class _UserListPageState extends State<UserListPage> {
                     onLoading: () async {
                       //从网络获取数据
                       try {
-                        params.pageNum++;
+                        _params.pageNum++;
                         List<UserInfo> date =
-                        await UserApi.getUserList(params);
+                        await UserApi.getUserList(_params);
                         if (date.length == 0) {
                           BotToast.showSimpleNotification(title: "没有数据了");
                           _refreshController.loadNoData();

@@ -1,7 +1,6 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
-import 'package:flutter_app/model/Global.dart';
 import 'package:flutter_app/page/MainPage.dart';
 import 'package:flutter_app/routers/MainRouters.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -12,7 +11,7 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Global.context = context;
+    // 国际化学习 ： http://www.ptbird.cn/flutter-localizations-date-pick-chinese.html
     // 全局配置子树下的SmartRefresher,下面列举几个特别重要的属性
     return RefreshConfiguration(
       headerBuilder: () => WaterDropHeader(),

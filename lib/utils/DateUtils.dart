@@ -137,7 +137,9 @@ class DataUtils {
 
   ///获取某一个月的最后一天。
   ///我们能提供和知道的条件有:(当天的时间,)
+  ///
   ///timeSamp:时间戳 单位（毫秒）
+  ///
   ///format:想要的格式  "yyyy年MM月dd hh:mm:ss"  "yyy😄MM👌dd  hh🙅MM🐶dd" "yyyy:MM:dd"
   getEndMoth({timeSamp: int, format: String}) {
     var dataFormart = new DateFormat(format);
@@ -153,7 +155,9 @@ class DataUtils {
 
   ///获取某一个月的最后一天。
   ///我们能提供和知道的条件有:(当天的时间,)
+  ///
   ///timeSamp:时间戳 单位（毫秒）
+  ///
   ///format:想要的格式  "yyyy年MM月dd hh:mm:ss"  "yyy😄MM👌dd  hh🙅MM🐶dd" "yyyy:MM:dd"
   getEndMothFor({mothFormart: String, format: String}) {
     DateTime startData = DateTime.parse(mothFormart);
@@ -168,9 +172,46 @@ class DataUtils {
     String formartResult = dataFormart.format(dateTimeeee);
     return formartResult;
   }
+
+  /// 获取某天的开始和结束的字符串
+  ///
+  /// date 要获取的那天
+  ///
+  /// format 格式化 默认是yyyy-MM-ddT23:59:59
+  ///
+  /// type 是要开始的还是结束的
+  String getStartAnEndDay(
+      {date: DateTime, String format = "yyyy-MM-ddT23:59:59", type: String}) {
+    if (type == 's') {
+      return getFormartData(timeSamp: date
+          .subtract(new Duration(days: 1))
+          .millisecondsSinceEpoch, format: format);
+    } else {
+      return getFormartData(
+          timeSamp: date.millisecondsSinceEpoch,
+          format: format);
+    }
+  }
 }
 
 class TimeData {
   String dataTime;
   int week;
+}
+
+class StartAndEndDay {
+  // 开始时间
+  String startDay;
+
+  // 结束时间
+  String endDay;
+
+  StartAndEndDay(this.startDay, this.endDay);
+
+  Map toMap() {
+    Map a = Map();
+    a['startDay'] = this.startDay;
+    a['endDay'] = this.endDay;
+    return a;
+  }
 }

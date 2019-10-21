@@ -13,7 +13,7 @@ class UserCard extends StatelessWidget {
     return Card(
       elevation: 5.0, //设置阴影
       color: Colors.white,
-      margin: EdgeInsets.only(bottom: 16.0),
+      margin: EdgeInsets.only(top: 1.0, bottom: 15.0),
       shape: RoundedRectangleBorder(
           // 圆角
           borderRadius: BorderRadius.all(Radius.circular(5.0))),

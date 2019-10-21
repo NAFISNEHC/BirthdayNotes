@@ -99,7 +99,8 @@ class _UserListPageState extends State<UserListPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       child: Container(
-        color: Colors.black87,
+        //color: Colors.black87,
+        color: Colors.white,
         child: Scaffold(
             backgroundColor: Colors.transparent, //把scaffold的背景色改成透明
             floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
@@ -108,24 +109,26 @@ class _UserListPageState extends State<UserListPage> {
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25.0),
-                    color: Colors.white,
-                    border: Border.all(color: Colors.white, width: 2.0),
+                    color: Colors.grey[200],
+                    border: Border.all(color: Colors.grey[200], width: 2.0),
                   ),
                   height: 40.0,
                   padding: EdgeInsets.only(
-                      top: 5.0, left: 16.0, right: 16.0),
-                  margin:
-                  EdgeInsets.only(top: 40.0, left: 16.0, right: 16.0),
+                      top: 8.0, left: 16.0, right: 16.0),
+                  margin: EdgeInsets.only(
+                      top: 40.0, left: 9.0, right: 9.0),
                   child: TextField(
                     maxLines: 1,
                     decoration: InputDecoration(
                       icon: Icon(
                         Icons.search,
-                        color: Colors.black87,
+                        //color: Colors.black87,
+                        color: Colors.grey[400],
+                        size: 25.0,
                       ),
                       hintText: '请输入要查询的客户信息',
-                      hintStyle: TextStyle(color: Colors.grey[400]),
-                      contentPadding: EdgeInsets.only(bottom: 2.0),
+                      hintStyle: TextStyle(color: Colors.grey[400], fontSize: 15.0,),
+                      contentPadding: EdgeInsets.only(top: 0.0),
                       border: InputBorder.none,
                     ),
 
@@ -133,7 +136,10 @@ class _UserListPageState extends State<UserListPage> {
                     onSubmitted: (s) async {
                       try {
                         _params.pageNum = 1;
-                        _params.keyword = s;
+                        if(s != "")
+                          _params.keyword = s;
+                        else
+                          _params.keyword = null;
                         getUserList(_params);
                         _refreshController.refreshCompleted();
                       } catch (e) {
@@ -145,7 +151,7 @@ class _UserListPageState extends State<UserListPage> {
                 Container(
                     width: double.infinity,
                     margin:
-                    EdgeInsets.only(left: 10.0, top: 10.0, bottom: 20),
+                    EdgeInsets.only(left: 20.0, top: 10.0, bottom: 10.0),
                     child: InkWell(
                       onTap: () {
                         _selectDay(context);
@@ -159,24 +165,28 @@ class _UserListPageState extends State<UserListPage> {
                                   '${EngDate(_date.month, _date.day)
                                       .judgeMonth()}',
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    //color: Colors.white,
+                                    color: Colors.black87,
                                     fontSize: 28.0,)),
                               TextSpan(
                                   text: ', ',
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    //color: Colors.white,
+                                    color: Colors.black87,
                                     fontSize: 20.0,)),
                               TextSpan(
                                   text: '${_date.day}',
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    //color: Colors.white,
+                                    color: Colors.black87,
                                     fontSize: 20.0,)),
                               TextSpan(
                                   text:
                                   ' ${EngDate(_date.month, _date.day)
                                       .judgeDay()}',
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    //color: Colors.white,
+                                    color: Colors.black87,
                                     fontSize: 20.0,)),
                             ],
                           )),

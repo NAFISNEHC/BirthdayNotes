@@ -12,7 +12,7 @@ class HttpUtils {
   static Dio dio;
 
   /// 默认配置
-  static const String API_PREFIX = 'http://172.27.107.6:8080/bn';
+  static const String API_PREFIX = 'http://192.168.0.107:8080/bn';
   static const int CONNECT_TIMEOUT = 10000;
   static const int RECEIVE_TIMEOUT = 3000;
 
@@ -28,10 +28,14 @@ class HttpUtils {
     data = data ?? {};
     method = method ?? 'GET';
     headers = headers ?? {};
+    var newData = {};
     /// restful 请求处理
     /// /gysw/search/hist/:user_id user_id=27
     /// 最终生成 url 为 /gysw/search/hist/27
     data.forEach((key, value) {
+      if (value != null || value == '') {
+        newData[key] = value;
+      }
       if (url.indexOf(key) != -1) {
         url = url.replaceAll(':$key', value.toString());
       }
@@ -39,12 +43,17 @@ class HttpUtils {
     url = API_PREFIX + url;
     /// 打印请求相关信息：请求地址、请求方式、请求参数
     print('请求地址：【' + method + '  ' + url + '】');
-    print('请求参数：' + data.toString());
+    print('请求参数：' + newData.toString());
     Dio dio = createInstance();
     var result;
     try {
-      Response<Map<String, dynamic>> response = await dio.request(url, data: data, options: new Options(method: method, headers: headers, contentType: Headers.jsonContentType,));
-      var resData = Result.fromJson(response.data);
+      Response<Map<String, dynamic>> response = await dio.request(
+          url, data: newData,
+          options: new Options(
+            method: method,
+            headers: headers,
+            contentType: Headers.jsonContentType,));
+      Result resData = Result.fromJson(response.data);
       // 判断是否成功
       if(resData.code == 0){
         result = resData.result;

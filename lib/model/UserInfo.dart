@@ -2,7 +2,9 @@ class UserInfo {
   String userName;
   int sex;
   String phone;
-  bool sendSMS;
+
+  // 需不需要发短信
+  int sendSMS;
 
   UserInfo({this.userName, this.sex, this.phone, this.sendSMS});
 
@@ -10,7 +12,7 @@ class UserInfo {
     userName = json['userName'];
     sex = json['sex'];
     phone = json['phone'];
-    sendSMS = json['sendSMS'] ?? false;
+    sendSMS = json['sendSMS'];
   }
 
   Map<String, dynamic> toJson() {

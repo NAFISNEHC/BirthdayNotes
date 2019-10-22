@@ -10,12 +10,13 @@ class UserCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String sendStr = (userInfo.sendSMS == 1) ? '待发送' : '已发送';
     return Card(
       elevation: 5.0, //设置阴影
       color: Colors.white,
       margin: EdgeInsets.only(top: 1.0, bottom: 15.0),
       shape: RoundedRectangleBorder(
-          // 圆角
+        // 圆角
           borderRadius: BorderRadius.all(Radius.circular(5.0))),
       child: Row(
         children: <Widget>[
@@ -28,7 +29,7 @@ class UserCard extends StatelessWidget {
                     backgroundColor: Colors.white,
                   ),
                   title: Text(
-                    userInfo.userName,
+                    userInfo.userName + '（$sendStr）',
                     style: TextStyle(
                       color: Colors.black87,
                       fontWeight: FontWeight.w500,

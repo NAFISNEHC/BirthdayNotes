@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/UserInfo.dart';
 import 'package:flutter_app/utils/JudgeSex.dart';
+import 'package:flutter_sms/flutter_sms.dart';
 
 /// 用户的卡片
 class UserCard extends StatelessWidget {
   final UserInfo userInfo;
 
   UserCard({Key key, @required this.userInfo}) : super(key: key);
+
+  // 发送短信
+  void _sendSMS(String message, List<String> recipents) async {
+    String _result =
+    await FlutterSms.sendSMS(message: message, recipients: recipents)
+        .catchError((onError) {
+      print(onError);
+    });
+    print(_result);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +56,9 @@ class UserCard extends StatelessWidget {
           ),
           IconButton(
             icon: Icon(Icons.send, color: Colors.black87),
-            onPressed: null,
+            onPressed: () {
+              _sendSMS("生日快", ['+86 17600666233']);
+            },
           )
         ],
       ),
